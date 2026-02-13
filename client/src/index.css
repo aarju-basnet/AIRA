@@ -1,0 +1,156 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&display=swap');
+*{
+     font-family: "Outfit", sans-serif;
+}
+@theme{
+    --color-primary:#E6CCFF;
+}
+::-webkit-scrollbar{
+    display:none;
+}
+@custom-variant dark (&:where(.dark, .dark *));
+.sidebar-btn {
+  @apply w-full flex items-center gap-3 px-3 py-2
+  rounded-lg text-sm
+  hover:bg-gray-100 dark:hover:bg-gray-800
+  transition;
+}
+/* index.css */
+
+
+/* This ensures the root matches the theme if the component fails to cover it */
+.dark body {
+  background-color: #0e0e11;
+}
+
+.sidebar-title {
+  @apply text-xs text-gray-500 mb-2 px-2;
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg, 
+    rgba(255, 255, 255, 0) 0%, 
+    rgba(255, 255, 255, 0.05) 50%, 
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+@keyframes gradient-slow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient-slow {
+  background-size: 200% 200%;
+  animation: gradient-slow 6s ease infinite;
+}
+@keyframes gradient-slow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient-slow {
+  background-size: 200% 200%;
+  animation: gradient-slow 4s ease infinite;
+}
+
+/* Optional: Add a slight glow to the input on focus */
+form:focus-within .animate-gradient-slow {
+  filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.4));
+  transition: 0.3s;
+}
+
+/* For Light Mode */
+.light .animate-shimmer {
+  background: linear-gradient(
+    90deg, 
+    rgba(0, 0, 0, 0.05) 0%, 
+    rgba(0, 0, 0, 0.1) 50%, 
+    rgba(0, 0, 0, 0.05) 100%
+  );
+  background-size: 200% 100%;
+}
+.chat-item {
+  @apply w-full flex items-center gap-3 px-2 py-2
+  rounded-lg text-sm text-left
+  hover:bg-gray-100 dark:hover:bg-gray-800
+  transition;
+}
+.dropdown-btn {
+  @apply w-full flex items-center gap-3 px-4 py-2
+  text-sm hover:bg-gray-100 dark:hover:bg-gray-800 transition;
+}
+.sidebar-btn {
+  @apply w-full flex items-center gap-3
+  px-3 py-2 rounded-lg text-sm
+  hover:bg-gray-100 dark:hover:bg-gray-800
+  transition;
+}
+
+/* --------------------------------------------------
+   FORCE RESPONSIVE TOASTS (index.css)
+-------------------------------------------------- */
+
+/* 1. Target the Container */
+div.Toastify__toast-container {
+  /* Desktop: 320px | Mobile: 85% of screen */
+  width: clamp(260px, 85vw, 320px) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  padding: 0 !important;
+}
+
+/* 2. Target the Individual Toast Box */
+.Toastify__toast {
+  min-height: clamp(45px, 10vw, 60px) !important;
+  margin-bottom: 12px !important;
+  border-radius: 12px !important;
+  /* Font: Desktop 15px | Mobile 13px */
+  font-size: clamp(12px, 3.5vw, 13px) !important;
+  padding: 8px 12px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+}
+
+.Toastify__toast-icon {
+  width: 18px !important;
+  margin-inline-end: 6px !important;
+}
+
+.Toastify__close-button {
+  align-self: center !important;
+  padding-bottom: 2px !important;
+}
+
+/* 3. Target the Body/Text inside the Toast */
+.Toastify__toast-body {
+  margin: 0 !important;
+  padding: 0 !important;
+  align-items: center !important;
+}
+
+/* 4. Ensure the Icon scales down too */
+.Toastify__toast-icon {
+  width: clamp(18px, 4vw, 22px) !important;
+  margin-inline-end: 8px !important;
+}
+
+/* 5. Fix for tiny screens (iPhone SE / Fold) */
+@media (max-width: 320px) {
+  div.Toastify__toast-container {
+    width: 95vw !important;
+  }
+}
