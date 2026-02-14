@@ -1,5 +1,6 @@
 
 const express = require('express')
+app.set('trust proxy', 1);
 const helmet = require('helmet')
 const{globalLimiter} = require('./Middlewares/rateLimiters')
 const dotenv =require('dotenv')
