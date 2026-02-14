@@ -2,6 +2,7 @@
 const express = require('express')
 const server = express()
 
+
 server.set('trust proxy', 1);
 
 const helmet = require('helmet')
