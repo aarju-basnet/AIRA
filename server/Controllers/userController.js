@@ -41,17 +41,17 @@ async function register(req, res) {
 
        });
 
-       await transporter.sendMail({
-  from:`"AIRA" <${process.env.SMTP_USER}>`,
-  to: email,
-  subject: "Your AIRA Verification Code",
-  html: generateOtpTemplate(verificationOtp, name),
-  attachments: [{
-    filename: 'Aira.png',
-    path: path.join(__dirname, '../assets/Aira.png'), // Change this to your actual folder path
-    cid: 'airaLogo' // This MUST match the img src="cid:airaLogo"
-  }]
-});
+     //  await transporter.sendMail({
+ // from:`"AIRA" <${process.env.SMTP_USER}>`,
+  //to: email,
+  //subject: "Your AIRA Verification Code",
+  //html: generateOtpTemplate(verificationOtp, name),
+  //attachments: [{
+    //filename: 'Aira.png',
+    //path: path.join(__dirname, '../assets/Aira.png'), // Change this to your actual folder path
+    //cid: 'airaLogo' // This MUST match the img src="cid:airaLogo"
+  //}]
+//});
 
     const token = JWT.sign(
       { userId: user._id },
