@@ -1,6 +1,6 @@
 
 const express = require('express')
-server.set('trust proxy', 1);
+
 const helmet = require('helmet')
 const{globalLimiter} = require('./Middlewares/rateLimiters')
 const dotenv =require('dotenv')
@@ -14,6 +14,7 @@ DbConnection()
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const server = express()
+server.set('trust proxy', 1);
 
 server.use(express.json())
 server.use(helmet())
