@@ -1,7 +1,7 @@
 const express = require('express')
 const userController = require('../Controllers/userController')
 const authMiddleware = require('../Middlewares/authMiddleware')
-const{loginLimiter} = require('../Middlewares/rateLimiters')
+
 
 const router = express.Router()
 
@@ -9,7 +9,7 @@ router.post('/register', userController.register)
 
 router.post('/verify-email',  authMiddleware.protect, userController.verifyEmail)
 
-router.post('/login',  loginLimiter, userController.login)
+router.post('/login',   userController.login)
 router.post('/logout', userController.logout)
 
 router.post('/reset-password', userController.resetPasswords)

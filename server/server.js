@@ -3,10 +3,10 @@ const express = require('express')
 const server = express()
 
 
-server.set('trust proxy', 1);
 
-const helmet = require('helmet')
-const{globalLimiter} = require('./Middlewares/rateLimiters')
+
+
+
 const dotenv =require('dotenv')
 dotenv.config()
 const authRoutes = require('./Routes/authRoutes')
@@ -20,10 +20,10 @@ const cors = require('cors')
 
 
 server.use(express.json())
-server.use(helmet())
+
 server.use(cookieParser())
 
-server.use(globalLimiter)
+
 
 const FRONTEND_URL = process.env.FRONTEND_URL;
 server.use(
