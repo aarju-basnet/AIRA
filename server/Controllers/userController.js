@@ -76,8 +76,10 @@ async function register(req, res) {
       },
     });
   }catch (error) {
+    console.error("REGISTRATION ERROR DETAILS:", error);
   
   res.status(500).json({
+    
     success: false,
     message: error.message
   });
