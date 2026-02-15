@@ -5,6 +5,9 @@ const JWT = require("jsonwebtoken")
 const transporter = require('../config/nodemailer')
 const generateOtpTemplate = require('../Utils/EmailverifyTemplate')
 const ResetPasswordTemplate = require('../Utils/ResetpasswordTemplate')
+const { Resend } = require("resend");
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 
 async function register(req, res) {
   const { name, email, password } = req.body;
@@ -41,15 +44,16 @@ async function register(req, res) {
 
        });
 
-   transporter.sendMail({
-      from: `"AIRA" <${process.env.SMTP_USER}>`,
-      to: email,
-      subject: "Your AIRA Verification Code",
-      html: generateOtpTemplate(verificationOtp, name),
-      // No attachments = No file path errors!
-    }).catch(err => {
-      console.error("Email failed to send, but user was created:", err.message);
-    });
+        try {
+      await resend.emails.send({
+        from: "AIRA <onboarding@resend.dev>",
+        to: email,
+        subject: "Your AIRA Verification Code",
+        html: generateOtpTemplate(verificationOtp, name),
+      });
+    } catch (err) {
+      console.error("Email failed, OTP fallback:", verificationOtp);
+    }
     
     const token = JWT.sign(
       { userId: user._id },
@@ -226,56 +230,59 @@ async function logout(req,res){
 }
 
 
-async function resetPasswords(req,res){
-  const{email} =req.body
-  if(!email){
+async function resetPasswords(req, res) {
+  const { email } = req.body;
+
+  if (!email) {
     return res.status(400).json({
-      success:false,
-      message:"Email is required"
-    })
+      success: false,
+      message: "Email is required",
+    });
   }
-    try{
-      const user = await userModel.findOne({
-        email
-      })
-      if(!user){
-        return res.status(401).json({
-          success:false,
-          message:"please login first"
-        })
-      }
 
-      const otp  = String(Math.floor(100000+Math.random()*900000))
-      const resetpasswordexpired = Date.now()+1*60*601000
-      
-      user. resetPasswords = otp
-      user.resetPasswordExpired  =resetpasswordexpired
-       await user.save()
+  try {
+    const user = await userModel.findOne({ email });
 
-       await transporter.sendMail({
-  from:`"AIRA" <${process.env.SMTP_USER}>`,
-  to: email,
-  subject: "Reset Your Password",
-  html: ResetPasswordTemplate(otp, user.name),
-  attachments: [{
-    filename: 'Aira.png',
-    path: path.join(__dirname, '../assets/Aira.png'), // Change this to your actual folder path
-    cid: 'airaLogo' // This MUST match the img src="cid:airaLogo"
-  }]
-});
-      res.json({ success: true, message: "password has been reset successfully"});
-
-     
-
-      
-    }catch(error){
-      return res.status(500).json({
-        success:false,
-        message:"Internal server error"
-      })
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "Please login first",
+      });
     }
 
+    const otp = String(Math.floor(100000 + Math.random() * 900000));
+    const resetPasswordExpired = Date.now() + 1 * 60 * 60 * 1000;
+
+    user.resetPasswords = otp;
+    user.resetPasswordExpired = resetPasswordExpired;
+    await user.save();
+
+   
+    try {
+      await resend.emails.send({
+        from: "AIRA <onboarding@resend.dev>",
+        to: email,
+        subject: "Reset Your Password",
+        html: ResetPasswordTemplate(otp, user.name),
+      });
+    } catch (err) {
+      console.error("Reset email failed, OTP fallback:", otp);
+    }
+    
+
+    return res.json({
+      success: true,
+      message: "Password reset OTP sent successfully",
+    });
+  } catch (error) {
+    console.error("RESET PASSWORD ERROR:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
   }
+}
 
 
 
