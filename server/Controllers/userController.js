@@ -2,7 +2,7 @@ const userModel = require("../models/user");
 const bcrypt = require('bcrypt')
 const path = require("path")
 const JWT = require("jsonwebtoken")
-const transporter = require('../config/nodemailer')
+
 const generateOtpTemplate = require('../Utils/EmailverifyTemplate')
 const ResetPasswordTemplate = require('../Utils/ResetpasswordTemplate')
 const { Resend } = require("resend");
