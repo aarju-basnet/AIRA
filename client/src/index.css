@@ -154,3 +154,553 @@ div.Toastify__toast-container {
     width: 95vw !important;
   }
 }
+
+@media (min-width: 768px) {
+  .safety-container {
+    padding: 2rem;
+  }
+
+  .hero-title {
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .hero-description {
+    font-size: 0.7rem;
+    text-align: left;
+  }
+
+  .guideline-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on desktop */
+    gap: 1rem;
+  }
+
+  .pro-tip-box {
+    flex-direction: row; /* Side-by-side on desktop */
+    text-align: left;
+    padding: 2rem;
+  }
+}
+
+/* Small Mobile optimization (under 380px) */
+@media (max-width: 380px) {
+  .hero-title {
+    font-size: 0.5rem;
+  }
+  
+  .card-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+/* --- Root Variables for Theme Sync --- */
+:root {
+  --accent-gradient: linear-gradient(90deg, #ec4899, #8b5cf6, #3b82f6);
+  --card-bg-light: rgba(249, 250, 251, 0.5);
+  --card-bg-dark: rgba(255, 255, 255, 0.02);
+}
+
+/* --- Container & Spacing --- */
+.safety-page-wrapper {
+  padding: 1.25rem; /* tight mobile padding */
+}
+
+/* --- Typography (Mobile First) --- */
+
+/* Extremely small sub-headers */
+.label-text {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+/* Compact Hero Title for Mobile */
+.hero-title {
+  font-size: 1.35rem; /* Small on mobile */
+  line-height: 1.2;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+/* Small, readable body text */
+.body-description {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #6b7280; /* Gray-500 */
+}
+
+/* Card titles */
+.card-heading {
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.card-body {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* --- Layout Components --- */
+.guideline-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Stacked on mobile */
+  gap: 1rem;
+}
+
+.tip-box {
+  padding: 0.8rem;
+  font-size: 9px;
+  border-radius: 1rem;
+}
+
+/* --- Responsive Scaling (Desktop) --- */
+@media (min-width: 768px) {
+  .safety-page-wrapper {
+    padding: 3rem;
+  }
+.back-to-aira1{
+  padding-top: 200px;
+  margin-top: 200px;
+}
+  .hero-title {
+    font-size: 1rem; /* Scale back up for desktop */
+  }
+
+  .body-description {
+    font-size: 0.8rem;
+  }
+
+  .guideline-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .card-heading {
+    font-size: 0.8rem;
+    text-transform: none;
+  }
+
+  .card-body {
+    font-size: 0.6rem;
+  }
+}
+
+/* Specific fix for ultra-small screens */
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: 0.8rem;
+  }
+
+  .back-to-aira{
+    padding-top: 100px;
+  }
+  
+  .body-description {
+    font-size: 8px;
+  }
+}
+
+
+@media (min-width: 768px) {
+  .hero-heading {
+    font-size: 1rem; /* ~36px */
+  }
+
+  .sub-text {
+    font-size: 9px;
+  }
+
+  .input-field-text {
+    font-size: 9px;
+  }
+
+  .submit-btn-text {
+    font-size: 10px;
+  }
+}
+
+/* ================= MOBILE RESPONSIVE FIX ================= */
+@media screen and (max-width: 640px) {
+
+  /* Main Card */
+  .fluid-card {
+    border-radius: 1.5rem !important;
+  }
+
+  .fluid-card > div {
+    min-height: auto !important;
+    border-radius: 1.45rem !important;
+  }
+
+  /* Left Side Container */
+  .fluid-card .w-full.md\:w-\[55\%\] {
+    padding: 20px 16px !important;
+  }
+
+  /* Logo */
+  .fluid-card img {
+    width: 80px !important;
+  }
+
+  /* Heading */
+  .fluid-card h2 {
+    font-size: 10.5px !important;
+    line-height: 0.6 !important;
+    margin-bottom: 6px !important;
+  }
+
+  /* Subtitle */
+  .fluid-card p {
+    font-size: 9.5px !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Form spacing */
+  .form1 {
+    margin-top: 1px !important;
+  }
+
+  .form1.space-y-5 > * + * {
+    margin-top: 1px !important;
+  }
+
+  /* Inputs wrapper */
+  .input-value1 {
+    gap: 6px !important;
+  }
+
+  /* Input fields */
+  .form1 input {
+    height: 30px !important;
+    min-height: 30px !important;
+    padding: 0 14px !important;
+    font-size: 10px !important;
+    line-height: 0.8 !important;
+    border-radius: 14px !important;
+  }
+
+  /* Placeholder */
+  .form1 input::placeholder {
+    font-size: 8px !important;
+  }
+
+  /* Password show/hide */
+  .form1 button[type="button"] {
+    font-size: 6px !important;
+    right: 10px !important;
+    top: 50% !important;
+  }
+
+  /* Submit Button */
+  .form1 .create-account-button[type="submit"] {
+    height: 30px !important;
+    min-height: 30px !important;
+    padding: 0 14px !important;
+    font-size: 9px !important;
+    line-height: 0.5 !important;
+    border-radius: 14px !important;
+    margin-top: 4px !important;
+  }
+
+  /* Bottom Sign In text */
+  .form1 + p {
+    margin-top: 14px !important;
+    font-size: 8px !important;
+    line-height: 0.4 !important;
+  }
+
+}
+
+
+/* ================= LOGIN PAGE MOBILE (CLEAN SIGNUP STYLE) ================= */
+@media screen and (max-width: 640px) {
+
+  /* FORM WRAPPER */
+  .login-form {
+    margin-top: 3px !important;
+  }
+
+  .login-div {
+    gap: 7px !important;
+  }
+
+  /* INPUT FIELDS (same as signup style) */
+  .login-form input {
+    height: 30px !important;
+    min-height: 30px !important;
+    padding: 0 12px !important;
+    font-size: 10px !important;
+    border-radius: 12px !important;
+    line-height: 0.8 !important;
+  }
+
+  .login-form input::placeholder {
+    font-size: 8.5px !important;
+  }
+
+  /* SHOW/HIDE BUTTON */
+  .login-button {
+    font-size: 7px !important;
+    right: 10px !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  /* ERROR MESSAGE */
+  .login-form p {
+    font-size: 8px !important;
+    padding: 8px 10px !important;
+  }
+
+  /* FORGOT PASSWORD */
+  .login-form .flex.justify-end span {
+    font-size: 7px !important;
+    margin-top: 0.4px !important;
+  }
+
+  /* SPACING BETWEEN ELEMENTS */
+  .login-form.space-y-5 > * + * {
+    margin-top: 5px !important;
+  }
+
+   .login-button1[type="button"] {
+    font-size: 6px !important;
+    right: 10px !important;
+    top: 40% !important;
+  }
+
+  .login-button1[type="submit"] {
+    height: 30px !important;
+    min-height: 30px !important;
+    padding: 0 14px !important;
+    font-size: 9px !important;
+    line-height: 0.4 !important;
+    border-radius: 14px !important;
+    margin-top: 4px !important;
+  }
+
+  .donot-have.create-account p{
+     font-size: 8px !important;
+  }
+  .create-account span{
+    font-size: 8px;
+  }
+}
+
+
+/* ================= RESET PASSWORD MOBILE ================= */
+@media screen and (max-width: 640px) {
+
+  /* MAIN RIGHT PANEL */
+  .reset-form1 {
+    width: 100% !important;
+    padding: 20px 16px !important;
+  }
+
+  /* LOGO SECTION */
+  .reset-form2 {
+    margin-bottom: 18px !important;
+  }
+
+  .reset-form4 img {
+    width: 70px !important;
+  }
+
+  /* HEADING */
+  .reset-form5 h2 {
+    font-size: 12px !important;
+    margin-bottom: 4px !important;
+    line-height: 1 !important;
+  }
+
+  .reset-form5 p {
+    font-size: 8px !important;
+    letter-spacing: 0.12em !important;
+  }
+
+  /* FORM SPACING */
+  .space-y-6,
+  .space-y-8 {
+    margin-top: 7px !important;
+  }
+
+  .space-y-6 > * + *,
+  .space-y-8 > * + * {
+    margin-top: 4px !important;
+  }
+
+  /* INPUT FIELD */
+  .reset-form1 input {
+    height: 30px !important;
+    min-height: 30px !important;
+    padding: 0 12px !important;
+    font-size: 8px !important;
+    border-radius: 12px !important;
+  }
+
+  /* OTP BOXES */
+  .otp-fill1 input   {
+     width:25px;
+    height: 25px !important;
+    font-size: 8px !important;
+    border-radius: 10px !important;
+  }
+
+  .otp-fill1 {
+    gap: 6px !important;
+    height: 10px;
+    
+  }
+
+  /* NEW PASSWORD SHOW/HIDE */
+  .reset-button1 {
+    font-size: 7px !important;
+    right: 10px !important;
+  }
+
+  /* MAIN BUTTONS */
+  .reset-form6,
+  .reset-form1 button[type="submit"] {
+    height: 30px !important;
+    font-size: 8px !important;
+    padding: 0 12px !important;
+    border-radius: 12px !important;
+  }
+
+  /* BACK TO LOGIN TEXT */
+  .reset-button6 {
+    margin-top: 8px !important;
+    font-size: 6px !important;
+    letter-spacing: 0.15em !important;
+  }
+
+   .otp-form3 {
+    margin-top: 8px !important;
+  }
+
+  /* INPUT FIELD (inside Input component) */
+  .otp-form3 input {
+    height: 30px !important;
+    min-height: 30px !important;
+    padding: 0 12px !important;
+    font-size: 12px !important;
+    border-radius: 10px !important;
+   
+  }
+
+  .otp-form3 input::placeholder {
+    font-size: 8px !important;
+  }
+
+  /* SHOW / HIDE BUTTON */
+  .reset-button1 {
+    font-size: 5.5px !important;
+    right: 12px !important;
+    margin-top: 2.5px;
+    
+  }
+
+  /* FINAL SUBMIT BUTTON */
+  .finalizing1 {
+    height: 30px !important;
+    padding: 0 12px !important;
+    font-size: 10px !important;
+    border-radius: 10px !important;
+    margin-top: 4px !important;
+    line-height: 0.5 !important;
+  }
+
+  .reset-form1.email2 {
+    margin-top: 6px !important;
+  }
+
+  /* INPUT FIELD (Registered Email) */
+  .email2 input {
+    height: 30px !important;
+    min-height: 30px !important;
+    padding: 0 12px !important;
+    font-size: 8px !important;
+    border-radius: 10px !important;
+  }
+
+  .email2 input::placeholder {
+    font-size: 8px !important;
+  }
+
+  /* FORM SPACING */
+  .email2.space-y-6 > * + * {
+    margin-top: 10px !important;
+  }
+
+}
+
+@media screen and (max-width: 640px) {
+
+  /* MAIN CONTAINER */
+  .verify-email1 {
+    width: 100% !important;
+    padding: 20px 16px !important;
+  }
+
+  /* LOGO SECTION */
+  .verify-email2 {
+    margin-bottom: 18px !important;
+  }
+
+  .verify-email2 img {
+    width: 70px !important;
+  }
+
+  /* TITLE */
+  .verify-email5 h2 {
+    font-size: 12px !important;
+    margin-bottom: 4px !important;
+    line-height: 0.5 !important;
+  }
+
+  .verify-email5 p {
+    font-size: 6px!important;
+    letter-spacing: 0.12em !important;
+  }
+
+  /* OTP WRAPPER SPACING */
+  .enter-otp1 {
+    margin-top: 7px !important;
+  }
+
+  .enter-otp1.space-y-10 > * + * {
+    margin-top: 7px !important;
+  }
+
+  /* OTP INPUTS */
+  .enter-otp2 input {
+    width: 25px !important;
+    height: 25px !important;
+    font-size: 7cqb !important;
+    border-radius: 10px !important;
+  }
+
+  .enter-otp2 {
+    gap: 5px !important;
+  }
+
+  /* BUTTON */
+  .button10 {
+    height: 30px !important;
+    font-size: 9px !important;
+    padding: 0 12px !important;
+    border-radius: 12px !important;
+    margin-top: 3px !important;
+    line-height: 0.7 !important;
+  }
+
+  /* BOTTOM TEXT */
+  .verify-email1 p {
+    margin-top: 6px !important;
+    font-size: 6px !important;
+    letter-spacing: 0.1em !important;
+  }
+}

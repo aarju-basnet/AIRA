@@ -5,8 +5,7 @@ const JWT = require("jsonwebtoken")
 
 const generateOtpTemplate = require('../Utils/EmailverifyTemplate')
 const ResetPasswordTemplate = require('../Utils/ResetpasswordTemplate')
-const { Resend } = require("resend");
-const resend = new Resend(process.env.RESEND_API_KEY);
+const sendEmail = require('../Utils/mail')
 
 
 async function register(req, res) {
@@ -45,12 +44,11 @@ async function register(req, res) {
        });
 
         try {
-      await resend.emails.send({
-        from: "AIRA <onboarding@resend.dev>",
-        to: email,
-        subject: "Your AIRA Verification Code",
-        html: generateOtpTemplate(verificationOtp, name),
-      });
+     await sendEmail({
+    to: email,
+    subject: "Your AIRA Verification Code",
+    html: generateOtpTemplate(verificationOtp, name),
+})
     } catch (err) {
       console.error("Email failed, OTP fallback:", verificationOtp);
     }
@@ -259,12 +257,11 @@ async function resetPasswords(req, res) {
 
    
     try {
-      await resend.emails.send({
-        from: "AIRA <onboarding@resend.dev>",
-        to: email,
-        subject: "Reset Your Password",
-        html: ResetPasswordTemplate(otp, user.name),
-      });
+      await sendEmail({
+    to: user.email,
+    subject: "Reset Your Password",
+    html: ResetPasswordTemplate(otp, user.name), // Changed 'html' to 'htmlContent'
+  });
     } catch (err) {
       console.error("Reset email failed, OTP fallback:", otp);
     }

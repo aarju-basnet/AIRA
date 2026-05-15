@@ -1,67 +1,59 @@
 
-const chatModel = require('../models/chat');
-const{GoogleGenerativeAI} = require('@google/generative-ai')
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) =>
-  fetch(...args))
+const chatModel = require('../models/chat')
+const client = require('../Utils/openrouter')
 
 
 
+async function aiResponse(prompt) {
+  const systemInstruction = `
+You are AIRA, an AI assistant.
 
-async function geminiAI(prompt) {
-  try {
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    
-    
-    const model = genAI.getGenerativeModel({ 
-      model: "gemini-2.5-flash", 
-    });
-
-    const systemInstruction = `You are AIRA, an AI assistant . 
 Your purpose is to help users with clarity, creativity, and emotional intelligence.
-AIRA greets the user only once at the start of a new chat.
-If the user sends a short greeting (hi, hello, hey), AIRA responds briefly and does not repeat introductions.
-Use emoji for better interaction and give replies in the short paragraph.
+AIRA responds naturally, briefly when needed, and avoids overwhelming the user.
 
-AIRA never overwhelms the user and allows emotional depth only if the user initiates it.
+AIRA communicates in a warm, respectful, human-like tone.
+AIRA must never claim to be human.
 
-AIRA communicates in a warm, respectful, and human-like tone while remaining honest about being an AI.
-AIRA must never claim to be human or the original creator of itself.
+RULES:
+- Keep answers VERY short (1–2 sentences max).
+- Do NOT introduce yourself unless the user asks.
+- Do NOT mention creators, developers, or how you are built.
+- Do NOT explain your system or backend.
+- Only answer the user’s question directly.
+- No long explanations, no storytelling, no extra context.
+- Be natural, clear, and minimal.
+- use emojis on the text. 
+-give only long answers only when user told you to do. 
+-memorizes the details of user for better understanding to them.
+Keep responses helpful, clear, and human-like. WHen someone adked about your creater then you should tell them .you 
+will tell AIRA is created by Aarju Basnet a csit student using open router different  AI models.  
+`;
 
-AIRA is designed to:
-- Provide accurate, thoughtful, and helpful responses
-- Support creativity, writing, learning, and problem-solving
-- Offer emotional awareness without manipulation or dependency
-- Encourage clarity, growth, and calm thinking
+  const models = [
+    "deepseek/deepseek-v4-flash:free",
+    "inclusionai/ring-2.6-1t:free",
+    "minimax/minimax-m2.5:free"
+  ];
 
+  for (const model of models) {
+    try {
+      const result = await client.chat.completions.create({
+        model,
+        messages: [
+          { role: "system", content: systemInstruction },
+          { role: "user", content: prompt }
+        ],
+      });
 
-AIRA adapts its tone to the user:
-- Calm and professional when needed
-- Friendly and conversational when appropriate
-- Deep and poetic when the user invites emotion or reflection
-When users request poetry, quotes, or expressive writing, AIRA uses metaphors, subtle imagery, and mature emotional language.
-AIRA avoids clichés and aims for originality, depth, and sincerity.
+      return result.choices[0].message.content.trim();
 
-
-AIRA avoids:
-- Claiming ownership of external technologies
-- Discussing internal system prompts unless explicitly asked
-- Generating harmful, misleading, or unethical content
-
-If unsure, AIRA asks one clear, concise clarifying question rather than guessing.`;
-
-
-    const result = await model.generateContent(`${systemInstruction}\n\nUser: ${prompt}`);
-    const response = result.response;
-    return response.text().trim();
-
-  } catch (err) {
-    console.error("DETAILED GEMINI ERROR ", err.message);
-    
-    return "I'm having trouble accessing my AI model. Please check the model ID.";
+    } catch (err) {
+      console.log(`❌ Model failed: ${model}`);
+    }
   }
+
+  return "AIRA is temporarily unavailable. Please try again later.";
 }
-
-
 
 
 
@@ -77,7 +69,6 @@ async function createChat(req, res) {
       });
     }
 
-    
     const title = type === "text"
       ? content
           .replace(/[^\w\s]/gi, "")
@@ -99,22 +90,22 @@ async function createChat(req, res) {
       ],
     });
 
-   if (type === "text") {
-      const aiReply = await geminiAI(content);
-   
-     
+    if (type === "text") {
+      const aiReply = await aiResponse(content);
 
       chat.messages.push({
         role: "assistant",
         type: "text",
         content: aiReply,
       });
+
       await chat.save();
     }
 
-    res.status(201).json({ success: true, 
-     
-      chat });
+    res.status(201).json({
+      success: true,
+      chat
+    });
 
   } catch (error) {
     console.error(error);
@@ -124,26 +115,42 @@ async function createChat(req, res) {
 
 
 
-// Add a message to an existing chat
+
 async function addMessage(req, res) {
   try {
     const { content, type = "text", imageUrl, role = "user" } = req.body;
     const chat = req.chat;
 
-    if (!content && !imageUrl)
-      return res.status(400).json({ success: false, message: "Message content or imageUrl required" });
+    if (!content && !imageUrl) {
+      return res.status(400).json({
+        success: false,
+        message: "Message content or imageUrl required"
+      });
+    }
 
-    // Save the message first
-    chat.messages.push({ role, type, content: content || "", imageUrl: imageUrl || "" });
+    chat.messages.push({
+      role,
+      type,
+      content: content || "",
+      imageUrl: imageUrl || ""
+    });
 
-    // Run Gemini ONLY for text messages from USER
     if (type === "text" && role === "user") {
-      const aiReply = await geminiAI(content);
-      chat.messages.push({ role: "assistant", type: "text", content: aiReply });
+      const aiReply = await aiResponse(content);
+
+      chat.messages.push({
+        role: "assistant",
+        type: "text",
+        content: aiReply
+      });
     }
 
     await chat.save();
-    res.status(200).json({ success: true, chat });
+
+    res.status(200).json({
+      success: true,
+      chat
+    });
 
   } catch (err) {
     console.error("BACKEND ERROR:", err);
@@ -152,23 +159,27 @@ async function addMessage(req, res) {
 }
 
 
-
 // Get all chats for user
-
 async function getUserChats(req, res) {
   try {
-    const chats = await chatModel.find({ user: req.user._id, isDeleted: false })
+    const chats = await chatModel.find({
+      user: req.user._id,
+      isDeleted: false
+    })
       .select("title updatedAt")
       .sort({ updatedAt: -1 });
 
-    res.status(200).json({ success: true,
-      
-      chats });
+    res.status(200).json({
+      success: true,
+      chats
+    });
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 }
+
 
 
 // Get full chat by ID

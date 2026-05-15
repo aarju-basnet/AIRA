@@ -3,10 +3,6 @@ const express = require('express')
 const server = express()
 
 
-
-
-
-
 const dotenv =require('dotenv')
 dotenv.config()
 const authRoutes = require('./Routes/authRoutes')
@@ -30,6 +26,7 @@ server.use(
   cors({
     origin: FRONTEND_URL,
     credentials: true,
+    
   })
 )
 

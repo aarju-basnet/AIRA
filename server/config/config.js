@@ -5,7 +5,7 @@ const DbConnection = async () => {
     const uri = process.env.MONGO_URI;
     if (uri) {
       const safeUri = uri.replace(/\/\/(.*):/, "//****:"); // hide username
-      console.log("Mongo URI:", safeUri);
+      
     }
 
     await mongoose.connect(process.env.MONGO_URI);
