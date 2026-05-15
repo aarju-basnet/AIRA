@@ -543,9 +543,9 @@ div.Toastify__toast-container {
 
   /* OTP BOXES */
   .otp-fill1 input   {
-     width:25px;
-    height: 25px !important;
-    font-size: 8px !important;
+     width:27px;
+    height: 27px !important;
+    font-size: 5px !important;
     border-radius: 10px !important;
   }
 
@@ -656,13 +656,13 @@ div.Toastify__toast-container {
 
   /* TITLE */
   .verify-email5 h2 {
-    font-size: 12px !important;
+    font-size: 10px !important;
     margin-bottom: 4px !important;
     line-height: 0.5 !important;
   }
 
   .verify-email5 p {
-    font-size: 6px!important;
+    font-size: 8px!important;
     letter-spacing: 0.12em !important;
   }
 
@@ -677,9 +677,9 @@ div.Toastify__toast-container {
 
   /* OTP INPUTS */
   .enter-otp2 input {
-    width: 25px !important;
-    height: 25px !important;
-    font-size: 7cqb !important;
+    width: 29px !important;
+    height: 29px !important;
+    font-size: 5px !important;
     border-radius: 10px !important;
   }
 

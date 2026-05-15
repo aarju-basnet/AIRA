@@ -50,16 +50,16 @@ const generateOtpTemplate = (otp, name) => {
             }
 
             .user-greeting {
-                font-size: 24px;
-                font-weight: 800;
+                font-size: 22px;
+                font-weight: 700;
                 color: #ffffff;
                 margin-bottom: 10px;
             }
 
             .sub-text {
                 color: #9ca3af;
-                font-size: 14px;
-                line-height: 1.6;
+                font-size: 12px;
+                line-height: 1.3;
                 margin-bottom: 30px;
             }
 
@@ -73,8 +73,8 @@ const generateOtpTemplate = (otp, name) => {
             }
 
             .otp-code {
-                font-size: 38px;
-                font-weight: 900;
+                font-size: 34px;
+                font-weight: 800;
                 letter-spacing: 12px;
                 color: #ec4899; /* Pink accent */
                 margin: 0;
@@ -88,7 +88,7 @@ const generateOtpTemplate = (otp, name) => {
                 text-decoration: none;
                 border-radius: 16px;
                 font-weight: bold;
-                font-size: 14px;
+                font-size: 12px;
                 text-transform: uppercase;
                 letter-spacing: 1px;
                 margin: 30px 0;
@@ -103,7 +103,7 @@ const generateOtpTemplate = (otp, name) => {
             }
 
             .footer-text {
-                font-size: 11px;
+                font-size: 10px;
                 color: #4b5563;
                 text-transform: uppercase;
                 letter-spacing: 2px;
@@ -128,7 +128,7 @@ const generateOtpTemplate = (otp, name) => {
                 </p>
 
                 <div class="otp-container">
-                    <p style="color: #6b7280; font-size: 10px; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 15px;">Authorization Key</p>
+                    <p style="color: #6b7280; font-size: 8px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;">Authorization Key</p>
                     <h1 class="otp-code">${otp}</h1>
                 </div>
 

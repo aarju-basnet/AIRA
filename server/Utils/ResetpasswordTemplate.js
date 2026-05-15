@@ -50,9 +50,9 @@ const ResetPasswordTemplate = (otp, name) => {
             }
 
             .otp-code {
-                font-size: 42px;
-                font-weight: 900;
-                letter-spacing: 12px;
+                font-size: 38px;
+                font-weight: 800;
+                letter-spacing: 10px;
                 color: #ffffff;
                 margin: 0;
             }
@@ -66,7 +66,7 @@ const ResetPasswordTemplate = (otp, name) => {
                 text-decoration: none;
                 border-radius: 18px;
                 font-weight: bold;
-                font-size: 14px;
+                font-size: 12px;
                 text-transform: uppercase;
                 letter-spacing: 1px;
                 margin: 30px 0;
@@ -99,8 +99,8 @@ const ResetPasswordTemplate = (otp, name) => {
             </div>
 
             <div class="content">
-                <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 10px; color: #ffffff;">Reset Password</h2>
-                <p style="color: #9ca3af; font-size: 15px; line-height: 1.6;">
+                <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 10px; color: #ffffff;">Reset Password</h2>
+                <p style="color: #9ca3af; font-size: 12px; line-height: 1.3;">
                     Hi <b>${name}</b>, use the secure authorization key below to finalize your password recovery.
                 </p>
 
@@ -110,7 +110,7 @@ const ResetPasswordTemplate = (otp, name) => {
 
                 <a href="${resetLink}" class="btn-reset">Reset Password</a>
 
-                <p style="font-size: 11px; color: #4b5563; margin-top: 20px;">
+                <p style="font-size: 10px; color: #4b5563; margin-top: 20px;">
                     This key is active for <span style="color: #9ca3af;">15 minutes</span>. <br>
                     © 2026 AIRA PROTOCOL 
                 </p>
