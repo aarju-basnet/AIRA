@@ -3,11 +3,11 @@ const{protect} =require('../Middlewares/authMiddleware')
 
 const { checkChatOwner } = require('../Middlewares/chatMiddleware')
 const { createChat, addMessage, getUserChats, getChatById,  deleteChat,} = require('../Controllers/chatController')
-
+const aiRateLimiter = require('../Middlewares/rateLimiter')
 
 const router = express.Router()
 
-router.post("/create",  protect, createChat)
+router.post("/create",  protect, aiRateLimiter, createChat)
 
 router.post("/message", protect,  checkChatOwner, addMessage)
 
