@@ -38,7 +38,10 @@ AIRA creater then you will tell she is a currently 7th sem 22 years computer sci
     "minimax/minimax-m2.5:free",
     "google/gemma-4-31b-it:free",
     "liquid/lfm-2.5-1.2b-instruct:free",
-    "qwen/qwen3-next-80b-a3b-instruct:free"
+    "qwen/qwen3-next-80b-a3b-instruct:free",
+    "inclusionai/ling-3.0-flash:free",
+    "poolside/laguna-s-2.1:free",
+    "cohere/north-mini-code:free"
   ];
 
   for (const model of models) {
